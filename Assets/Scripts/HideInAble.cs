@@ -10,9 +10,19 @@ public class HideInAble : MonoBehaviour
     public LayerMask whosHiding;
     public LayerMask whosSearching;
 
+    public Sprite emptySprite;
+    public Sprite hidingSprite;
+
     private GameObject toHide = null;
+    private int originalLayer = -1;
     private bool hasKillable = false;
     private bool busy = false;
+
+    void Update()
+    {
+        if (toHide != null)
+            gameObject.transform.position = toHide.transform.position;
+    }
 
     void OnTriggerStay2D(Collider2D other)
     {
@@ -34,10 +44,19 @@ public class HideInAble : MonoBehaviour
             hasKillable = true;
             toHide.GetComponent<Killable>().enabled = false;
         }
+
         Movable movable = toHide.GetComponent<Movable>();
         movable.moveSpeed = movable.moveSpeed * speedFactor;
         movable.jumpDisabled = disableJumping;
+
+        originalLayer = obj.GetComponent<SpriteRenderer>().sortingOrder;
+        obj.GetComponent<SpriteRenderer>().sortingOrder = gameObject.GetComponent<SpriteRenderer>().sortingOrder - 1;
+
+        obj.transform.position = gameObject.transform.position;
+        gameObject.GetComponent<SpriteRenderer>().sprite = hidingSprite;
+
         ignoreLayerCollisions(whosHiding, whosSearching, true);
+
         busy = true;
         StartCoroutine(Busy());
     }
@@ -68,12 +87,21 @@ public class HideInAble : MonoBehaviour
     {
         if (hasKillable)
             toHide.GetComponent<Killable>().enabled = true;
+
         Movable movable = toHide.GetComponent<Movable>();
         movable.moveSpeed = movable.moveSpeed / speedFactor;
         movable.jumpDisabled = false;
+
+        toHide.GetComponent<SpriteRenderer>().sortingOrder = originalLayer;
+
         toHide = null;
         hasKillable = true;
+        originalLayer = -1;
+
+        gameObject.GetComponent<SpriteRenderer>().sprite = emptySprite;
+
         ignoreLayerCollisions(whosHiding, whosSearching, false);
+
         busy = true;
         StartCoroutine(Busy());
     }
