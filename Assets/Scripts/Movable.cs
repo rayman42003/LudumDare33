@@ -21,11 +21,7 @@ public class Movable : MonoBehaviour {
     void FixedUpdate()
     {
         if (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundMask))
-        {
-            if (jumpsLeft == 0)
-                Debug.Log("Jump Reset");
             jumpsLeft = numJumps;
-        }
     }
 
     public void MoveRight()
