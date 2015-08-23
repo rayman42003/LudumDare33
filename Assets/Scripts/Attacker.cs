@@ -7,19 +7,25 @@ public class Attacker : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.name == "Player")
-            Attack(other.gameObject.GetComponent<Killable>());
+        checkKill(other.gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "Player")
+        checkKill(other.gameObject);
+    }
+
+    private void checkKill(GameObject obj)
+    {
+        if(obj.name == "Player")
         {
-            Killable toKill = other.gameObject.GetComponent<Killable>();
+            Killable toKill = obj.GetComponent<Killable>();
+            Debug.Log(toKill);
             if (toKill.enabled)
                 Attack(toKill);
         }
     }
+
 
 	public void Attack(Killable character)
     { 
