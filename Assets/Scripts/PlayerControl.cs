@@ -17,8 +17,5 @@ public class PlayerControl : MonoBehaviour {
             player.MoveRight();
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             player.Jump();
-
-        if (Input.GetKeyDown(KeyCode.R))
-            Application.LoadLevel(Application.loadedLevel);
 	}
 }

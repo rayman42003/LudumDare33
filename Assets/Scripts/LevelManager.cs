@@ -17,7 +17,10 @@ public class LevelManager : MonoBehaviour {
             Stealable[] stealables = Object.FindObjectsOfType(typeof(Stealable)) as Stealable[];
             Debug.Log((totalStealables - stealables.Length).ToString() + "/" + totalStealables.ToString());
         }
-	}
+
+        if (Input.GetKeyDown(KeyCode.R))
+            Application.LoadLevel(Application.loadedLevel);
+    }
 
     public void ResetBarrels()
     {
