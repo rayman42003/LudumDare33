@@ -14,7 +14,6 @@ public class PlayerControl : MonoBehaviour {
             player.MoveLeft();
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             player.MoveRight();
-
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             player.Jump();
 	}

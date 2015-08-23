@@ -7,6 +7,7 @@ public class Movable : MonoBehaviour {
     public Transform groundCheck;
     public float groundCheckRadius;
     public LayerMask groundMask;
+    public bool jumpDisabled = false;
     
     public static readonly int numJumps = 1;
     private Rigidbody2D body;
@@ -35,7 +36,7 @@ public class Movable : MonoBehaviour {
 
     public void Jump()
     {
-        if (grounded)
+        if (grounded && !jumpDisabled)
         {
             body.velocity = new Vector2(body.velocity.x, jumpHeight);
             grounded = false;
