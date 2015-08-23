@@ -10,18 +10,17 @@ public class Movable : MonoBehaviour {
     
     public static readonly int numJumps = 1;
     private Rigidbody2D body;
-    private int jumpsLeft;
+    private bool grounded;
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        jumpsLeft = numJumps;
+        grounded = false;
     }
 
     void FixedUpdate()
     {
-        if (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundMask))
-            jumpsLeft = numJumps;
+        grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundMask);
     }
 
     public void MoveRight()
@@ -36,10 +35,10 @@ public class Movable : MonoBehaviour {
 
     public void Jump()
     {
-        if (jumpsLeft > 0)
+        if (grounded)
         {
             body.velocity = new Vector2(body.velocity.x, jumpHeight);
-            --jumpsLeft;
+            grounded = false;
         }
     }
 }
