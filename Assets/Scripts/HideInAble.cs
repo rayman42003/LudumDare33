@@ -45,6 +45,8 @@ public class HideInAble : MonoBehaviour
             toHide.GetComponent<Killable>().enabled = false;
         }
 
+        obj.GetComponent<PlayerControl>().canSteal = false;
+
         Movable movable = toHide.GetComponent<Movable>();
         movable.moveSpeed = movable.moveSpeed * speedFactor;
         movable.jumpDisabled = disableJumping;
@@ -87,6 +89,8 @@ public class HideInAble : MonoBehaviour
     {
         if (hasKillable)
             toHide.GetComponent<Killable>().enabled = true;
+
+        toHide.GetComponent<PlayerControl>().canSteal = true;
 
         Movable movable = toHide.GetComponent<Movable>();
         movable.moveSpeed = movable.moveSpeed / speedFactor;

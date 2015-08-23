@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour {
     private Movable player;
+    public bool canSteal = true;
 	// Use this for initialization
 	void Start () {
         player = GetComponent<Movable>();
