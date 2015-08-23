@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Attacker : MonoBehaviour {
 
-    public LayerMask attackLayer;
+ //   public LayerMask attackLayer;
 
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -20,7 +20,6 @@ public class Attacker : MonoBehaviour {
         if(obj.name == "Player")
         {
             Killable toKill = obj.GetComponent<Killable>();
-            Debug.Log(toKill);
             if (toKill.enabled)
                 Attack(toKill);
         }
