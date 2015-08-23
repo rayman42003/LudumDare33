@@ -18,4 +18,11 @@ public class LevelManager : MonoBehaviour {
             Debug.Log((totalStealables - stealables.Length).ToString() + "/" + totalStealables.ToString());
         }
 	}
+
+    public void ResetBarrels()
+    {
+        HideInAble[] barrels = FindObjectsOfType<HideInAble>() as HideInAble[];
+        foreach (HideInAble barrel in barrels)
+            barrel.Reset();
+    }
 }

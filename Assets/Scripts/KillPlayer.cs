@@ -3,14 +3,14 @@ using System.Collections;
 
 public class KillPlayer : Killable {
 
-    private LevelManager levelManager;
+    private LevelManager level;
 
     public float respawnTime = 1.0f;
     private float gravityScale;
 
     void Start()
     {
-        levelManager = FindObjectOfType<LevelManager>();   
+        level = FindObjectOfType<LevelManager>();   
         gravityScale = gameObject.GetComponent<Rigidbody2D>().gravityScale;
     }
 
@@ -24,6 +24,7 @@ public class KillPlayer : Killable {
 
         gameObject.GetComponent<PlayerControl>().enabled = false;
 
+        level.ResetBarrels();
         StartCoroutine(RespawnTime(gravityScale));
     }
 
@@ -35,11 +36,11 @@ public class KillPlayer : Killable {
 
     public void Ressurect(float gravityScale)
     {
-        gameObject.GetComponent<Renderer>().enabled = true;
-
         gameObject.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
-        gameObject.GetComponent<Rigidbody2D>().position = levelManager.checkpoint.position;
+        gameObject.GetComponent<Rigidbody2D>().position = level.checkpoint.position;
 
         gameObject.GetComponent<PlayerControl>().enabled = true;
+
+        gameObject.GetComponent<Renderer>().enabled = true;
     }
 }

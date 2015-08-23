@@ -17,6 +17,12 @@ public class HideInAble : MonoBehaviour
     private int originalLayer = -1;
     private bool hasKillable = false;
     private bool busy = false;
+    private Vector3 originalPosition;
+
+    void Start()
+    {
+        originalPosition = gameObject.transform.position;
+    }
 
     void Update()
     {
@@ -108,5 +114,10 @@ public class HideInAble : MonoBehaviour
 
         busy = true;
         StartCoroutine(Busy());
+    }
+
+    public void Reset()
+    {
+        gameObject.transform.position = originalPosition;
     }
 }
