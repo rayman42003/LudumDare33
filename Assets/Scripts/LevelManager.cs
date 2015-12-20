@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
 
@@ -19,7 +20,7 @@ public class LevelManager : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.R))
-            Application.LoadLevel(Application.loadedLevel);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ResetBarrels()
